@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>LaTeX Transformer</title>
+	<style>
+        body {
+            font-family: sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            margin: 20px;
+        }
+    
+        textarea {
+            width: 90%;
+            height: 200px;
+            margin-bottom: 10px;
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            border: 1px solid #333;
+            padding: 10px;
+            resize: vertical;
+        }
+    
+        button {
+            margin-top: 10px;
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+            border: 1px solid #555;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    
+        button:hover {
+            background-color: #3a3a3a;
+        }
+    
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+    </style>
+    
+</head>
+<body>
+	<h1>Transform to STACK-compatible LaTeX</h1>
+	<form method="POST">
+		<div class="container">
+			<div>
+				<h3>Input</h3>
+				<textarea name="latex_input" placeholder="Enter LaTeX code here" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">{{.InputText}}</textarea>
+			</div>
+			<div>
+				<h3>Output</h3>
+				<textarea id="outputArea" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">{{if .Success}}{{.OutputText}}{{else}}{{.ErrorMessage}}{{end}}</textarea>
+				<button type="button" onclick="copyOutput()">Copy Output to Clipboard</button>
+			</div>
+		</div>
+		<button type="submit">Transform</button>
+	</form>
+
+	<script>
+	function copyOutput() {
+		const output = document.getElementById("outputArea");
+		if (navigator.clipboard && window.isSecureContext) {
+			// Modern clipboard API with HTTPS
+			navigator.clipboard.writeText(output.value)
+				.then(() => alert("Copied to clipboard!"))
+				.catch(err => alert("Failed to copy: " + err));
+		} else {
+			// Fallback for insecure context (e.g., localhost)
+			output.select();
+			document.execCommand("copy");
+			alert("Copied to clipboard!");
+		}
+	}
+	</script>
+</body>
+</html>
