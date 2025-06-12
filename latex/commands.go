@@ -35,13 +35,14 @@ type commandReplacement struct {
 func GetCommandReplacements() map[string]commandReplacement {
 	return map[string]commandReplacement{
 		"mbox": {true, true, false, "{", "}"},
+		"Tilde": {true, true, false, "\\tilde{", "}"},
 		"intertext": {true, true, false, "\\text{", "}\\\\ "},
 	}
 }
 
 func CreateCustomCommandPreamble(usedCustomCommands *map[string]bool, info *latexTransformationInfo) string {
 	dependencyMap := customCommandDependencies()
-	for comm, _ := range *usedCustomCommands {
+	for comm := range *usedCustomCommands {
 		dependencies, ok := dependencyMap[comm]
 		if ok {
 			for _, dep := range dependencies {

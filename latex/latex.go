@@ -346,7 +346,7 @@ func handlePrevEnvironOpen(char rune, info *latexTransformationInfo) error {
 		}
 		info.setPrevToken(token{none, ""})
 		contains := info.getKnownMathEnvirons(environ)
-		if contains && info.countMathEnvs() <= 1 {
+		if contains && info.countMathEnvs() <= 1 && info.mode == notOpen {
 			if !ok {
 				info.log("Wrapped environment " + string(environ) + " in \\( \\)")
 				info.addToOutputString("\\(\\begin{" + environ + "}")
@@ -381,7 +381,7 @@ func handlePrevEnvironClose(char rune, info *latexTransformationInfo) error {
 		}
 		info.setPrevToken(token{none, ""})
 		contains := info.getKnownMathEnvirons(environ)
-		if contains && info.countMathEnvs() == 0  {
+		if contains && info.countMathEnvs() == 0 && info.mode == notOpen {
 			if !ok {
 				info.addToOutputString("\\end{" + environ + "}\\)")
 			}
