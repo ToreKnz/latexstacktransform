@@ -1,10 +1,11 @@
 package main
 
 import (
-    "stacklatex/frontend"
+    // "stacklatex/frontendweb"
+    "stacklatex/frontenddesktop"
 )
 
 func main() {
-    // frontend.ServeWeb(":1500")
-    frontend.RunDesktopApp()
+    // frontendweb.ServeWeb("1500")
+    frontenddesktop.RunDesktopApp()
 }

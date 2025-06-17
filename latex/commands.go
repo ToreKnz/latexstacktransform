@@ -34,6 +34,7 @@ type commandReplacement struct {
 
 func GetCommandReplacements() map[string]commandReplacement {
 	return map[string]commandReplacement{
+		"R": {true, false, false, "\\mathbb{R}", ""},
 		"mbox": {true, true, false, "{", "}"},
 		"Tilde": {true, true, false, "\\tilde{", "}"},
 		"intertext": {true, true, false, "\\text{", "}\\\\ "},
